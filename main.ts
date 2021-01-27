@@ -31,12 +31,8 @@ input.onButtonPressed(Button.A, function () {
     showStars()
 })
 input.onButtonPressed(Button.AB, function () {
+    doWarp()
     buildStars()
-    for (let index = 0; index < 2; index++) {
-        basic.showIcon(IconNames.SmallDiamond)
-        basic.showIcon(IconNames.Diamond)
-        basic.showIcon(IconNames.Target)
-    }
     showStars()
 })
 input.onButtonPressed(Button.B, function () {
@@ -55,6 +51,22 @@ function buildStars () {
 function findCoord (num: number) {
     sx = Math.trunc(num / 5)
     sy = num % 5
+}
+function doWarp () {
+    images.createBigImage(`
+        . . . . . . . . . .
+        # # # # . # # # # .
+        . . # . . . # . . .
+        . . . # # # # . . .
+        . . . . . . . . . .
+        `).scrollImage(1, 200)
+    images.createBigImage(`
+        . . . . . . . . . .
+        . # . . # . . . . .
+        . . . . . . . . . .
+        . . . # . . . . . .
+        . . . . . . . . . .
+        `).scrollImage(1, 200)
 }
 function showStars () {
     basic.showLeds(`
@@ -76,20 +88,7 @@ let Types: string[] = []
 let Stars: number[] = []
 let Mfound = 0
 let TypeList: string[] = []
-images.createBigImage(`
-    . . . . . . . . . .
-    # # # # . # # # # .
-    . . # . . . # . . .
-    . . . # # # # . . .
-    . . . . . . . . . .
-    `).scrollImage(1, 200)
-images.createBigImage(`
-    . . . . . . . . . .
-    . . . . . . . . . .
-    . . . . . . . . . .
-    . . . . . . . . . .
-    . . . . . . . . . .
-    `).scrollImage(1, 200)
+doWarp()
 TypeList = ["D", "H", "J", "K", "L", "M", "N", "R", "T", "Y"]
 buildStars()
 showStars()
